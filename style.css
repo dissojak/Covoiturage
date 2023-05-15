@@ -1,0 +1,60 @@
+body {
+    background-color: rgb(98, 98, 98);
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: white;
+    margin: 0 auto;
+  }
+  
+  form {
+    margin: auto;
+    margin-top: 200px;
+    width: 200px;
+    border: 3px solid rgb(255, 255, 0);
+    padding: 20px;
+    border-radius: 15px;
+    background-color: white;
+  }
+  
+  form label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  form input[type="text"],
+  form input[type="password"],
+  form input[type="submit"],
+  form .signup-button {
+    border: 1px solid black;
+    padding: 5px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  form input[type="submit"],
+  form .signup-button {
+    margin-top: 10px;
+    background-color: purple;
+    color: yellow;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  form input[type="submit"]:hover,
+  form .signup-button:hover {
+    background-color: yellow;
+    color: purple;
+  }
+
+
+
+  
+
