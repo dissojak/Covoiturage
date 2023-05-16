@@ -14,6 +14,6 @@ $username = $_SESSION['username'];
 <body>
   <h2>Welcome to Your Account</h2>
   
-  <p>Hello!</p>
+  <p>Hello, <?php echo $username; ?>!</p>
 </body>
 </html>

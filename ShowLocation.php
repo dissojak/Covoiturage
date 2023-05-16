@@ -1,0 +1,55 @@
+
+<?php require_once('location.php'); ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Available Locations</title>
+    <!-- Add Bootstrap CSS link here -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Available Locations</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Number of Places</th>
+                    <th>Price</th>
+                    <th>Departure Date</th>
+                    <th>Departure City</th>
+                    <th>Destination City</th>
+                    <th>Cin</th>
+                    <th>Mat</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $loc = new location();
+                $availableLocations = $loc->showAvailableLocations();
+
+                foreach ($availableLocations as $location) {
+                    echo "<tr>";
+                    echo "<td>" . $location['nbplace'] . "</td>";
+                    echo "<td>" . $location['prix'] . "</td>";
+                    echo "<td>" . $location['datedepare'] . "</td>";
+                    echo "<td>" . $location['villedepare'] . "</td>";
+                    echo "<td>" . $location['villefin'] . "</td>";
+                    echo "<td>" . $location['Cin'] . "</td>";
+                    echo "<td>" . $location['mat'] . "</td>";
+                    echo "<td>";
+                    echo "<form method='POST' action='MakeLocation.php'>";
+                    echo "<input type='hidden' name='location_id' value='" . $location['idlocation'] . "'>";
+                    echo "<button type='submit' class='btn btn-primary' name='ML'>Make Location</button>";
+                    echo "</form>";
+                    echo "</td>";
+                    echo "</tr>";
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
+    <!-- Add Bootstrap JS link here -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -30,6 +30,11 @@
       </div>
 
       <div class="form-group">
+        <label for="tel">Téléphone:</label>
+        <input type="tel" class="form-control" id="tel" name="tel" required>
+      </div>
+
+      <div class="form-group">
         <label for="role">Role:</label>
         <select class="form-control" id="role" name="role">
           <option value="user">User</option>
