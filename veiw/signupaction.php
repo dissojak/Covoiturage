@@ -1,48 +1,52 @@
 <?php
-require_once('Accounts.php');
-$acc = new Accounts();
+require_once('../controllers/AccountController.php');
+require_once('../models/Account.php');
 session_start();
 
-$acc->acc_nom = $_POST["nom"];
-$acc->acc_prenom = $_POST["pr"];
-$acc->acc_cin = $_POST["cin"];
-$acc->acc_adresse = $_POST["adresse"];
-$acc->acc_tel = $_POST["tel"];
-$acc->acc_role = $_POST["role"];
-$acc->acc_username = $_POST["username"];
-$acc->acc_pw = $_POST["password"];
+$nom = $_POST["nom"];
+$prenom = $_POST["pr"];
+$cin = $_POST["cin"];
+$adresse = $_POST["adresse"];
+$tel = $_POST["tel"];
+$role = $_POST["role"];
+$username = $_POST["username"];
+$pw = $_POST["password"];
+
+$account= new Account($username, $pw, $nom, $cin, $adresse, $tel, $role);
+//$voiture= new Voiture($mat,$cin,$carModel);
+$AC = new AccountController();
 
 // Validate the username and password
-if ($acc->cinExist($acc->acc_cin)) {
+if ($AC->cinExist($cin)) {
     $cinexist = "CIN already exists!";
-} else if ($acc->userExist($acc->acc_username)) {
+} else if ($AC->userExist($username)) {
     $userexist = "Username is already in use!";
-} else if ($acc->acc_role == "owner") {
+} else if ($role == "owner") {
     // Save the user as authenticated
-    $_SESSION['username'] = $acc->acc_username;
-    $_SESSION['password'] = $acc->acc_pw;
-    $_SESSION['nom'] = $acc->acc_nom;
-    $_SESSION['prenom'] = $acc->acc_prenom;
-    $_SESSION['cin'] = $acc->acc_cin;
-    $_SESSION['adresse'] = $acc->acc_adresse;
-    $_SESSION['tel'] = $acc->acc_tel;
-    $_SESSION['role'] = $acc->acc_role;
+    $_SESSION['username'] = $username;
+    $_SESSION['password'] = $pw;
+    $_SESSION['nom'] = $nom;
+    $_SESSION['prenom'] = $prenom;
+    $_SESSION['cin'] = $cin;
+    $_SESSION['adresse'] = $adresse;
+    $_SESSION['tel'] = $tel;
+    $_SESSION['role'] = $role;
 
-    header('Location: ADDVoiture.php');
+    header('Location: AddVoiture.php');
     exit();
 } else {
     // Save the user as authenticated
    
-      // $_SESSION['username'] = $acc->acc_username;
-      // $_SESSION['password'] = $acc->acc_pw;
-      // $_SESSION['nom'] = $acc->acc_nom;
-      // $_SESSION['prenom'] = $acc->acc_prenom;
-      // $_SESSION['cin'] = $acc->acc_cin;
-      // $_SESSION['adresse'] = $acc->acc_adresse;
-      // $_SESSION['tel'] = $acc->acc_tel;
-      // $_SESSION['role'] = $acc->acc_role;
+      // $_SESSION['username'] = $username;
+      // $_SESSION['password'] = $pw;
+      // $_SESSION['nom'] = $nom;
+      // $_SESSION['prenom'] = $prenom;
+      // $_SESSION['cin'] = $cin;
+      // $_SESSION['adresse'] = $adresse;
+      // $_SESSION['tel'] = $tel;
+      // $_SESSION['role'] = $role;
 
-    $acc->insertUser();
+    $AC->insertUser($account);
 
     header('Location: login.php');
     exit();
@@ -71,40 +75,40 @@ if ($acc->cinExist($acc->acc_cin)) {
     <form action="signupaction.php" method="post">
       <div class="form-group">
         <label for="nom">Nom:</label>
-        <input type="text" class="form-control" id="nom" name="nom" value="<?php echo isset($acc->acc_nom) ? $acc->acc_nom : ''; ?>" required>
+        <input type="text" class="form-control" id="nom" name="nom" value="<?php echo isset($nom) ? $nom : ''; ?>" required>
       </div>
 
       <div class="form-group">
         <label for="pr">Prénom:</label>
-        <input type="text" class="form-control" id="pr" name="pr" value="<?php echo isset($acc->acc_prenom) ? $acc->acc_prenom : ''; ?>" required>
+        <input type="text" class="form-control" id="pr" name="pr" value="<?php echo isset($prenom) ? $prenom : ''; ?>" required>
       </div>
 
       <div class="form-group">
         <label for="cin">CIN:</label>
-        <input type="text" class="form-control" id="cin" name="cin" value="<?php echo isset($acc->acc_cin) ? $acc->acc_cin : ''; ?>" required>
+        <input type="text" class="form-control" id="cin" name="cin" value="<?php echo isset($cin) ? $cin : ''; ?>" required>
       </div>
 
       <div class="form-group">
         <label for="adresse">Adresse:</label>
-        <input type="text" class="form-control" id="adresse" name="adresse" value="<?php echo isset($acc->acc_adresse) ? $acc->acc_adresse : ''; ?>" required>
+        <input type="text" class="form-control" id="adresse" name="adresse" value="<?php echo isset($adresse) ? $adresse : ''; ?>" required>
       </div>
 
       <div class="form-group">
         <label for="tel">Téléphone:</label>
-        <input type="tel" class="form-control" id="tel" name="tel" value="<?php echo isset($acc->acc_tel) ? $acc->acc_tel : ''; ?>" required>
+        <input type="tel" class="form-control" id="tel" name="tel" value="<?php echo isset($tel) ? $tel : ''; ?>" required>
       </div>
 
       <div class="form-group">
         <label for="role">Role:</label>
         <select class="form-control" id="role" name="role">
-          <option value="user" <?php echo isset($acc->acc_role) && $acc->acc_role == 'user' ? 'selected' : ''; ?>>User</option>
-          <option value="owner" <?php echo isset($acc->acc_role) && $acc->acc_role == 'owner' ? 'selected' : ''; ?>>Owner</option>
+          <option value="user" <?php echo isset($role) && $role == 'user' ? 'selected' : ''; ?>>User</option>
+          <option value="owner" <?php echo isset($role) && $role == 'owner' ? 'selected' : ''; ?>>Owner</option>
         </select>
       </div>
 
       <div class="form-group">
         <label for="username">Username:</label>
-        <input type="text" class="form-control" id="username" name="username" value="<?php echo isset($acc->acc_username) ? $acc->acc_username : ''; ?>" required>
+        <input type="text" class="form-control" id="username" name="username" value="<?php echo isset($username) ? $username : ''; ?>" required>
       </div>
 
       <div class="form-group">

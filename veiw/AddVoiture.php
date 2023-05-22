@@ -24,12 +24,6 @@ $cin = $_SESSION['cin'];
       </div>
       
       <div class="form-group">
-        <label for="cin">CIN:</label>
-        <input type="text" class="form-control" id="cin" name="cin" value="<?php echo isset($cin) ? $cin : ''; ?>" required><br>
-      </div>
-
-
-      <div class="form-group">
         <label for="model">Car Model:</label>
         <input type="text" class="form-control" id="model" name="model" required>
       </div>

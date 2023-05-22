@@ -1,3 +1,22 @@
+<?php
+  require_once('../controllers/AccountController.php');
+  require_once('../models/Account.php');
+  require_once('../controllers/VoitureController.php');
+  require_once('../models/Voiture.php');
+
+ session_start();
+ $username = $_SESSION['username'];
+// Retrieve the username from the session
+$AC = new AccountController();
+$VC = new VoitureController();
+
+$cin = $AC->getCinbyUsername($username);
+$mat = $VC->getMatbyCin($cin);
+$_SESSION['cin'] = $cin;
+$_SESSION['mat'] = $mat;
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,17 +48,9 @@
         <label for="villefin">Destination City:</label>
         <input type="text" class="form-control" id="villefin" name="villefin" required>
       </div>
-      <div class="form-group">
-        <label for="Cin">User CIN:</label>
-        <input type="number" class="form-control" id="Cin" name="Cin" required>
-      </div>
-      <div class="form-group">
-        <label for="mat">Matricule:</label>
-        <input type="number" class="form-control" id="mat" name="mat" required>
-      </div>
- 
       <input type="submit" class="btn btn-primary" value="Submit">
     </form>
+    <a href="PlacesStillAvailabale.php" class="btn btn-secondary">Check Available Places</a>
   </div>
 
   <!-- Bootstrap JS -->

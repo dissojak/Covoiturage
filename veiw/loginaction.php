@@ -1,18 +1,21 @@
 <?php 
-  require_once('accounts.php');
+  require_once('../controllers/AccountController.php');
+  require_once('../models/Account.php');
   session_start();
-  $acc=new accounts();
-$acc->acc_username=$_POST['username'];
-$acc->acc_pw=$_POST['pw'];
+
+  $username=$_POST['username'];
+  $pw=$_POST['pw'];
+  $AC=new AccountController();
 
 // Validate the username and pw
-if ($acc->verifyLogin($acc->acc_username, $acc->acc_pw)) {
-  // Sacc the user as authenticated
-  $_SESSION['username'] = $acc->acc_username;
-  $role = $acc->selectRole($acc->acc_username); // Store the role in a variable
+if ($AC->verifyLogin($username,$pw)) {
+  // SAC the user as authenticated
+  $_SESSION['username'] = $username;
+  $role = $AC->selectRole($username); // Store the role in a variable
   
   if ($role == 'user') {
       header('Location: ShowLocation.php');
+      //echo " doneeeeee";
       exit();
   } elseif ($role == 'owner') {
       header('Location: AddLocation.php');

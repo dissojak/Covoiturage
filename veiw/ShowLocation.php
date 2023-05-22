@@ -1,5 +1,8 @@
+<?php
+require_once('../controllers/LocationController.php');
+require_once('../models/Location.php');
+?>
 
-<?php require_once('location.php'); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +28,7 @@
             </thead>
             <tbody>
                 <?php
-                $loc = new location();
+                $loc = new LocationController();
                 $availableLocations = $loc->showAvailableLocations();
 
                 foreach ($availableLocations as $location) {
@@ -48,6 +51,8 @@
                 ?>
             </tbody>
         </table>
+        <!-- Button to redirect to LocationMade.php -->
+        <a href="LocationMade.php" class="btn btn-primary">Go to Location Made</a>
     </div>
     <!-- Add Bootstrap JS link here -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

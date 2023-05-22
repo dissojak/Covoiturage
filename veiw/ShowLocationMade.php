@@ -1,11 +1,12 @@
 <?php
-require_once('location.php');
+require_once('../controllers/LocationController.php');
+require_once('../models/Location.php');
 session_start();
 
 if (isset($_SESSION['username'])) {
     $username = $_SESSION['username'];
-    $loc = new location();
-    $placeres = $loc->getplaceres($username);
+    $LC = new LocationController();
+    $placeres = $LC->getplaceres($username);
 
     // Display the reserved matricule
     if ($placeres !== null && isset($placeres['placeRes'])) {
