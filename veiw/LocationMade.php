@@ -60,7 +60,7 @@ $mat = $AC->getPlaceResbyUsername($username);
                     echo "<td>";
                     echo "<form method='POST' action='deleteReservation.php'>";
                     echo "<input type='hidden' name='username' value='" . $username . "'>";
-                    // not like this it need to take cin to make place res null not idlocation 
+                    // not like this it needs to take cin to make place res null not idlocation 
                     echo "<button type='submit' class='btn btn-primary' name='ML'>Cancel Reservation</button>";
                     echo "</form>";
                     echo "</td>";
@@ -70,7 +70,7 @@ $mat = $AC->getPlaceResbyUsername($username);
             </tbody>
         </table>
         <!-- Button to redirect to LocationMade.php -->
-        <!-- <a href="LocationMade.php" class="btn btn-primary">Go to Location Made</a> -->
+        <a href="showlocation.php" class="btn btn-primary">Go to Show Location</a>
     </div>
     <!-- Add Bootstrap JS link here -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
