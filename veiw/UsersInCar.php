@@ -29,7 +29,7 @@ $userInfo = $LC->UsersInCar($mat);
 </head>
 <body class="bg-gray-100">
     <div class="container mx-auto py-10">
-        <h1 class="text-3xl font-bold mb-6">User Information</h1>
+        <h1 class="text-3xl font-bold mb-6" style="margin-left: 25px;">Users Going Information</h1>
 
         <?php if (!empty($userInfo)): ?>
             <div class="bg-white rounded-lg shadow-lg p-6">
@@ -71,6 +71,10 @@ $userInfo = $LC->UsersInCar($mat);
                 <p>No users are currently in the car.</p>
             </div>
         <?php endif; ?>
+
+        <!-- Button to redirect to PlacesStillAvailable.php -->
+        <br/>
+        <a href="PlacesStillAvailabale.php" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 float-right" style="margin-right: 25px;">Places Still Available</a>
     </div>
 </body>
 </html>

@@ -52,9 +52,9 @@ require_once('../models/Location.php');
             </tbody>
         </table>
         <!-- Button to redirect to LocationMade.php -->
-        <a href="LocationMade.php" class="btn btn-primary">Go to Location Made</a>
+        <a href="LocationMade.php" class="btn btn-primary">Location Made</a>
         <!-- Button to redirect to AddVoiture.php -->
-        <a href="AddVoiture.php" class="btn btn-primary">Go to Add Voiture</a>
+        <a href="AddVoiture.php" class="btn btn-primary">Add Voiture</a>
     </div>
     <!-- Add Bootstrap JS link here -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

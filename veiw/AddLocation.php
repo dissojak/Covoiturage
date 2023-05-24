@@ -50,6 +50,7 @@ $_SESSION['mat'] = $mat;
       </div>
       <input type="submit" class="btn btn-primary" value="Submit">
     </form>
+    <br/>
     <a href="PlacesStillAvailabale.php" class="btn btn-secondary">Check Available Places</a>
   </div>
 
