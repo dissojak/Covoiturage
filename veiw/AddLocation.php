@@ -51,7 +51,7 @@ $_SESSION['mat'] = $mat;
       <input type="submit" class="btn btn-primary" value="Submit">
     </form>
     <br/>
-    <a href="PlacesStillAvailabale.php" class="btn btn-secondary">Check Available Places</a>
+    <a href="CarEmpty.php" class="btn btn-secondary">Check Available Places</a>
   </div>
 
   <!-- Bootstrap JS -->

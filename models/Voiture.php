@@ -22,6 +22,9 @@ class Voiture {
     public function setMat($mat){
         $this->mat = $mat;
     }
+    public function getCin(){
+        return $this->cin;
+    }
 
 }
     

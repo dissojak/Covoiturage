@@ -12,7 +12,6 @@ class AccountController extends Connexion
     public function verifyLogin($username, $pw)
     {
 
-        // Prepare the query to retrieve username and pw from the database
         $stmt = $this->pdo->prepare('SELECT * FROM login WHERE username = ?');
         $stmt->execute([$username]);
         $user = $stmt->fetch();
@@ -27,7 +26,6 @@ class AccountController extends Connexion
     public function userExist($username)
     {
 
-        // Prepare the query to check if username already exists
         $stmt = $this->pdo->prepare('SELECT COUNT(*) FROM login WHERE username = ?');
         $stmt->execute([$username]);
         $count = $stmt->fetchColumn();
@@ -42,7 +40,6 @@ class AccountController extends Connexion
     public function cinExist($cin)
     {
 
-        // Prepare the query to check if cin already exists
         $stmt = $this->pdo->prepare('SELECT COUNT(*) FROM user WHERE cin = ?');
         $stmt->execute([$cin]);
         $count = $stmt->fetchColumn();
@@ -77,8 +74,6 @@ class AccountController extends Connexion
 
     public function selectRole($username)
     {
-
-        // Retrieve the user's role based on the provided username
         $stmt = $this->pdo->prepare("SELECT role FROM user WHERE username = ?");
         $stmt->execute([$username]);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -87,10 +82,19 @@ class AccountController extends Connexion
 
     public function kick($cin)
     {
+        $stmtUser = $this->pdo->prepare("SELECT placeres FROM user WHERE cin = ?");
+        $stmtUser->execute([$cin]);
+        $user = $stmtUser->fetch(PDO::FETCH_ASSOC);
+        $placeres = $user['placeres'];
+
+        $stmtLocationUpdate = $this->pdo->prepare("UPDATE location SET nbplace = nbplace + 1 WHERE mat = ? ");
+        $stmtLocationUpdate->execute([$placeres]);
+
         $stmt = $this->pdo->prepare("UPDATE user SET placeRes = NULL WHERE cin = ?");
         $stmt->execute([$cin]);
-        return $stmt->rowCount() > 0; // Returns true if the user was kicked successfully
+        return $stmt->rowCount() > 0; 
     }
+
     public function getPlaceResbyUsername($username)
     {
         $stmt = $this->pdo->prepare("SELECT placeRes FROM user WHERE username = ?");
@@ -98,11 +102,39 @@ class AccountController extends Connexion
         $placeRes = $stmt->fetchColumn();
         return $placeRes;
     }
+
     public function deleteReservation($username)
     {
+        $stmtUser = $this->pdo->prepare("SELECT placeres FROM user WHERE username = ?");
+        $stmtUser->execute([$username]);
+        $user = $stmtUser->fetch(PDO::FETCH_ASSOC);
+        $placeres = $user['placeres'];
+
+        $stmtLocationUpdate = $this->pdo->prepare("UPDATE location SET nbplace = nbplace + 1 WHERE mat = ? ");
+        $stmtLocationUpdate->execute([$placeres]);
+
         $stmt = $this->pdo->prepare("UPDATE user SET placeRes = NULL WHERE username = ?");
         $stmt->execute([$username]);
         return $stmt->rowCount() > 0; 
+    }
+
+    public function updateRoleToOwner($username)
+    {
+        $stmt = $this->pdo->prepare("UPDATE user SET role = 'owner' WHERE username = ?");
+        $stmt->execute([$username]);
+        return $stmt->rowCount() > 0; 
+    }
+    
+    public function checkPlaceReservation($username)
+    {
+        $stmt = $this->pdo->prepare("SELECT placeRes FROM user WHERE username = ?");
+        $stmt->execute([$username]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        $placeRes = $result['placeRes'];
+        $isNull = is_null($placeRes);
+        
+        return $isNull;
     }
 
 }

@@ -12,16 +12,34 @@
     $cin = $_SESSION["cin"];
     $mat = $_SESSION["mat"];
 
+    $LC = new LocationController();
     // echo $mat;
     // echo '<br/>';
     // echo $cin;
     
-    $loc = new location($nbplace, $prix, $datedepare, $villedepare, $villefin, $cin, $mat);
-    $LC = new LocationController();
+    if($LC->checkLocationByCin($cin)==TRUE)
+    {
+        $LC->deleteExpiredLocations();
+        $loc = new location($nbplace, $prix, $datedepare, $villedepare, $villefin, $cin, $mat);
 
-
-    $LC->createLocation($loc);
-    //just for now 
-    header('Location: PlacesStillAvailabale.php');
-    exit();
+        $LC->createLocation($loc);
+        //just for now 
+        // gona chaaaaange
+        header('Location: PlacesStillAvailabale.php');
+        exit();
+    }
+    if($LC->checkLocation($cin)){
+        header('Location: CarExisteInLocation.php');
+    }
+    else {
+        $loc = new location($nbplace, $prix, $datedepare, $villedepare, $villefin, $cin, $mat);
+        
+        $LC->createLocation($loc);
+        //just for now 
+        // gona chaaaaange
+        header('Location: PlacesStillAvailabale.php');
+        //echo $LC->checkLocation($cin);
+        //exit();
+    }
+    
 ?>

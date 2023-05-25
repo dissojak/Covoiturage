@@ -93,4 +93,47 @@ class LocationController extends Connexion
         return $userInfo;
     }
 
+    public function checkLocationByCin($cin)
+    {
+        $stmt = $this->pdo->prepare("SELECT COUNT(*) as count FROM location WHERE Cin = ?");
+        $stmt->execute([$cin]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $count = $result['count'];
+        if ($count > 0) {
+            return true; // Location exists for the given cin
+        } else {
+            return false; // No location found for the given cin
+        }
+    }
+
+    public function deleteExpiredLocations()
+    {
+        $currentDateTime = date('Y-m-d H:i:s');
+        $threeHoursFromNow = date('Y-m-d H:i:s', strtotime('+3 hours'));
+        $sql = "DELETE FROM location WHERE (datedepare + INTERVAL 3 HOUR) < '$currentDateTime'";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+    }
+
+    function checkLocation($cin)
+    {
+        $now = new DateTime(); // Current date and time
+
+        $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM location WHERE Cin = ? AND DATE_ADD(datedepare, INTERVAL 2 HOUR) > ?");
+        $stmt->execute([$cin, $now->format('Y-m-d H:i:s')]);
+        $count = $stmt->fetchColumn();
+    
+        return $count > 0;
+    }
+
+    public function getLocationPrice($idlocation)
+    {
+        $stmt = $this->pdo->prepare("SELECT prix FROM location WHERE idlocation = ?");
+        $stmt->execute([$idlocation]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['prix'];
+    }
+
+
+
 }

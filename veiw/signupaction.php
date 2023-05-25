@@ -12,7 +12,7 @@ $role = $_POST["role"];
 $username = $_POST["username"];
 $pw = $_POST["password"];
 
-$account= new Account($username, $pw, $nom, $cin, $adresse, $tel, $role);
+$account= new Account($username, $pw, $nom, $prenom ,$cin, $adresse, $tel, $role);
 //$voiture= new Voiture($mat,$cin,$carModel);
 $AC = new AccountController();
 

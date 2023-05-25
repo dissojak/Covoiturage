@@ -1,10 +1,20 @@
 <?php
+require_once('../controllers/AccountController.php');
+require_once('../models/Account.php');
+
 session_start();
 
 // Retrieve the username from the session
-$cin = $_SESSION['cin'];
+if (isset($_SESSION['cin'])) {
+  $cin = $_SESSION['cin'];
+} else {
+  $AC = new AccountController();
+  $username = $_SESSION['username'];
+  $cin = $AC->getCinbyUsername($username);
+}
 
 ?>
+
 
 <!DOCTYPE html>
 <html>

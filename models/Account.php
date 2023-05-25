@@ -11,10 +11,11 @@ class Account {
     private $carModel;
     private $mat;
 
-    function __construct($username = "", $pw = "", $nom = "", $cin = "", $adresse = "", $tel = "", $role = "", $carModel = "", $mat = "") {
+    function __construct($username = "", $pw = "", $nom = "", $prenom = "", $cin = "", $adresse = "", $tel = "", $role = "", $carModel = "", $mat = "") {
         $this->username = $username;
         $this->pw = $pw;
         $this->nom = $nom;
+        $this->prenom = $prenom;
         $this->cin = $cin;
         $this->adresse = $adresse;
         $this->tel = $tel;
@@ -31,6 +32,10 @@ class Account {
 
     public function getNom(){
         return $this->nom;
+    }
+
+    public function getPrenom(){
+        return $this->prenom;
     }
 
     public function getCin(){
@@ -58,6 +63,10 @@ class Account {
 
     public function setNom($nom){
         $this->nom = $nom;
+    }
+
+    public function setPrenom($prenom){
+        $this->prenom = $prenom;
     }
 
     public function setCin($cin){
